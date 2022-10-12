@@ -1,5 +1,7 @@
 function Formulario(){
     return (
-        <h2>Este componente es el de formulario</h2>
+        <h2>Este es el componente de Formulario</h2>
     )
 }
+
+export default Formulario

@@ -17,7 +17,6 @@ function App() {
      <Formulario></Formulario>
      <Error></Error>
      <Paciente></Paciente>
-
     </>
   )
 }
