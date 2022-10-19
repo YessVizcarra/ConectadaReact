@@ -1,6 +1,6 @@
 function Error(){
     return (
-          <h2>Este es el componente de Error</h2>
+        <h2>Error</h2>
     )
 }
 

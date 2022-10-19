@@ -1,6 +1,6 @@
 function Paciente(){
     return (
-        <h2>Este es el componente de Paciente</h2>
+       <h2>Este es el componente de Paciente</h2>
     )
 }
 
