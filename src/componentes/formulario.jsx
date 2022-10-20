@@ -1,19 +1,30 @@
 import { useState, useEffect } from "react";
+import Error from "./error";
 
-function Formulario() {
+function Formulario({pacientes,setPacientes}) {
     const [mascota, setMascota]= useState('');
     const [propietario, setPropietario]= useState('');
     const [email, setEmail]= useState('');
     const [alta, setAlta]= useState('');
     const [sintomas, setSintomas]= useState('');
+    const [error, setError] = useState(false)
 
     const validacionFormulario = (e)=>{
-        e.preventDefault;
+        e.preventDefault();
         if([mascota, propietario, email, alta,sintomas].includes('')){
-            console.log('Hay al menos un campo vacío')
-
+            setError(true);
+            return;
         }
+        setError(false)
+        const objPaciente={mascota,propietario,email,alta,sintomas}
+        setPacientes([...pacientes,objPaciente]);
+        setMascota('');
+        setPropietario('');
+        setEmail('');
+        setAlta('');
+        setSintomas('');
             }
+
 
     return (
         <div className="md:w-1/2 mx-5 lg:w-2/5">
@@ -23,6 +34,8 @@ function Formulario() {
             <form className="bg-slate-50 rounded-lg py-10 px-5 mb-10 shadow-md"
                 onSubmit={validacionFormulario}
             >
+                {error &&  <Error> <p>Todos los campos son obligatorios</p> 
+                </Error>}
                 <div>
                 <label htmlFor="mascota" className="block uppercase font-bold text-gray-700" >Nombre mascota</label>
                 <input
@@ -31,6 +44,7 @@ function Formulario() {
                     placeholder="Nombre mascota"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md"
                     onChange={(e)=>setMascota(e.target.value)}
+                    value={mascota}
 
                 />
                 </div>
@@ -73,9 +87,10 @@ function Formulario() {
                     placeholder="Sintomas"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md"
                     onChange={(e)=>setSintomas(e.target.value)}
+                    value={sintomas}
                 />
                 </div>
-                <input type="submit" className="bg-indigo-500 text-white font-bold uppercase hover:bg-indigo-700 cursor-pointer transition-colors" />
+                <input type="submit" className="bg-indigo-500 text-white font-bold uppercase hover:bg-indigo-700 cursor-pointer transition-colors p-2 rounded-md;" value={'Agregar'}/>
             </form>
 
 

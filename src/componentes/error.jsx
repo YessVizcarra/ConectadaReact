@@ -1,6 +1,8 @@
-function Error(){
+function Error({children}){
     return (
-        <h2>Error</h2>
+       <div className="bg-red-800 text-white uppercase font-bold p-3 mb-4">
+           {children}
+       </div>
     )
 }
 
