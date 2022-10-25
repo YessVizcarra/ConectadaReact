@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import Error from "./error";
 
-function Formulario({pacientes,setPacientes}) {
+function Formulario({pacientes,setPacientes,paciente,setPaciente}) {
     const [mascota, setMascota]= useState('');
     const [propietario, setPropietario]= useState('');
     const [email, setEmail]= useState('');
     const [alta, setAlta]= useState('');
     const [sintomas, setSintomas]= useState('');
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+    const generarId= ()=> {
+        const random = math.random().toString(36)
+        const fecha = Date.now().toString(36)
+        return random + fecha;
+    }
 
     const validacionFormulario = (e)=>{
         e.preventDefault();
@@ -18,6 +23,17 @@ function Formulario({pacientes,setPacientes}) {
         setError(false)
         const objPaciente={mascota,propietario,email,alta,sintomas}
         setPacientes([...pacientes,objPaciente]);
+        if(pacientes.id){
+           objPaciente.id=paciente.id
+           const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objPaciente:pacienteState)
+           setPacientes(pacientesActualizados)
+           setPaciente({})
+        }else{
+            objPaciente.id=generarId();
+            setPacientes([...pacientes,objPaciente])
+        }
+
+
         setMascota('');
         setPropietario('');
         setEmail('');
@@ -56,6 +72,7 @@ function Formulario({pacientes,setPacientes}) {
                     placeholder="Nombre propietario"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md"
                     onChange={(e)=>setPropietario(e.target.value)}
+                    value={propietario}
                 /> 
                 </div>
                 <div>
@@ -67,6 +84,7 @@ function Formulario({pacientes,setPacientes}) {
                     placeholder="Correo electrónico"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md"
                     onChange={(e)=>setEmail(e.target.value)}
+                    value={email}
                 /> 
                 </div>
                 <div>
@@ -76,6 +94,7 @@ function Formulario({pacientes,setPacientes}) {
                     type="date"
                     className="border-2 w-full p-2 mt-2 text-gray-600 rounded-md"
                     onChange={(e)=>setAlta(e.target.value)}
+                    value={alta}
                 />
                 </div>
 
@@ -90,7 +109,7 @@ function Formulario({pacientes,setPacientes}) {
                     value={sintomas}
                 />
                 </div>
-                <input type="submit" className="bg-indigo-500 text-white font-bold uppercase hover:bg-indigo-700 cursor-pointer transition-colors p-2 rounded-md;" value={'Agregar'}/>
+                <input type="submit" className="bg-indigo-500 text-white font-bold uppercase hover:bg-indigo-700 cursor-pointer transition-colors p-2 rounded-md;" value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}/>
             </form>
 
 
