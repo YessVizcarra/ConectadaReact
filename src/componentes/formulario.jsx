@@ -9,7 +9,7 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}) {
     const [sintomas, setSintomas]= useState('');
     const [error, setError] = useState(false);
     const generarId= ()=> {
-        const random = math.random().toString(36)
+        const random = Math.random().toString(36)
         const fecha = Date.now().toString(36)
         return random + fecha;
     }
@@ -31,6 +31,7 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}) {
         }else{
             objPaciente.id=generarId();
             setPacientes([...pacientes,objPaciente])
+
         }
 
 

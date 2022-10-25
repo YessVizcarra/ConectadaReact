@@ -7,18 +7,20 @@ function ListadoPacientes({pacientes,setPaciente,eliminarPaciente}) {
         <h2 className="font-black text-3xl text-center ">lista de pacientes</h2>
         <p className="text-xl text-center mt-5 mb-10">
           Administra tus <span className="text-indigo-600 font-bold ">Pacientes y Citas</span></p>
-         {pacientes.map(paciente =>(
+         {pacientes.length > 0 ? pacientes.map(paciente =>(
           <Paciente
           key={paciente.id}
           paciente={paciente}
           setPaciente={setPaciente}
           eliminarPaciente={eliminarPaciente}/>
 
-          ))}
-        <>
-         <h2 className="font-black text-center text-2xl">No hay pacientes</h2>
+          )): (
+        <div>
+           <h2 className="font-black text-center text-2xl">No hay pacientes</h2>
          <p className="text-center text-xl mt-5">Comienza agregando pacientes <span className="font-bold text-indigo-600"> Y aparecerán en este lugar</span></p>
-        </>
+        </div>
+          )}
+      
       </div>
     )
   }
